@@ -18,7 +18,7 @@ class LabChartFile:
     @property
     def channels(self):
         return [c for c in self._data.columns
-                if c not in ("Time", "time_abs", "block", "Comment")]
+                if c not in ("Time", "time_block", "time_abs", "block", "Comment")]
 
     @property
     def blocks(self):
@@ -26,18 +26,18 @@ class LabChartFile:
 
     @property
     def comments(self):
-        return self._data[self._data["Comment"].notna()][["time_abs", "block", "Comment"]]
+        return self._data[self._data["Comment"].notna()][["Time", "time_block", "time_abs", "block", "Comment"]].reset_index(drop=True)
 
     def get_block_df(self, b: int):
-        return self._data.loc[self._data["block"] == b, ["Time", "time_abs", "Comment", *self.channels]]
+        return self._data.loc[self._data["block"] == b, ["Time", "time_block", "time_abs", "Comment", *self.channels]]
 
     def get_channel(self, b: int, channel: str):
         if channel not in self.channels:
             raise InvalidChannelError(f"Canal inconnu: {channel}")
-        d = self._data.loc[self._data["block"] == b, ["Time", "time_abs", "Comment", channel]].copy()
+        d = self._data.loc[self._data["block"] == b, ["Time", "time_block", "time_abs", "Comment", channel]].copy()
         d.rename(columns={channel: "value"}, inplace=True)
         return d
 
     def slice_time_abs(self, tmin: float, tmax: float):
         m = (self._data["time_abs"] >= tmin) & (self._data["time_abs"] <= tmax)
-        return self._data.loc[m, ["Time", "time_abs", "block", "Comment", *self.channels]]
+        return self._data.loc[m, ["Time", "time_block", "time_abs", "block", "Comment", *self.channels]]

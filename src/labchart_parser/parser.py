@@ -7,11 +7,14 @@ contains one row per sample and includes a ``Comment`` column that
 captures annotation text for lines containing comments. Numeric sample
 lines have ``Comment`` set to ``None``.
 
-Additionally, ``block`` and ``time_abs`` columns are computed:
+Additionally, the following columns are computed:
 
 * ``block`` identifies the block of recording (starting at 1).
 * ``time_abs`` provides continuous time across all blocks by stitching
   together relative times.
+* ``time_block`` is the time within each block, re-based to start at 0.0
+  for the first sample of the block (useful to align comment times exactly
+  from zero within a block).
 """
 
 from __future__ import annotations
@@ -168,6 +171,8 @@ def parse_labchart_txt(path: str) -> Tuple[pd.DataFrame, Dict[str, object]]:
 
     df["block"] = block_ids
     df["time_abs"] = time_abs
+    # Zero-based time within each block (starts at 0.0 for every block)
+    df["time_block"] = df["time_abs"] - df.groupby("block")["time_abs"].transform("min")
 
     # Additional metadata: convert interval to seconds if possible
     try:
