@@ -172,7 +172,8 @@ def parse_labchart_txt(path: str) -> Tuple[pd.DataFrame, Dict[str, object]]:
     df["block"] = block_ids
     df["time_abs"] = time_abs
     # Zero-based time within each block (starts at 0.0 for every block)
-    df["time_block"] = df["time_abs"] - df.groupby("block")["time_abs"].transform("min")
+    # Compute directly from relative Time within each block
+    df["time_block"] = df["Time"] - df.groupby("block")["Time"].transform("first")
 
     # Additional metadata: convert interval to seconds if possible
     try:
