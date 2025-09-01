@@ -9,10 +9,10 @@ Converts exported LabChart data into a pandas DataFrame with blocks, continuous 
 ## Export from labchart as .txt
 
 Export from labchart as follows:
-- 
+
   <img src="img/lc_signal_export.png" width="300" alt="LabChart screenshot showing signal export dialog">
 
-    - Before exporting in LabChart, make sure time is displayed as "Start from Block"
+Before exporting in LabChart, make sure time is displayed as "Start from Block"
 
 
 ## Installation
