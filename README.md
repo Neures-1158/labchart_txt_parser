@@ -19,6 +19,8 @@ Export from labchart as follows:
 
 **Prerequisites**: Python ≥3.8, pip ≥21, and git must be installed.
 
+
+
 ### For users
 
 Install directly from GitHub:
@@ -52,15 +54,16 @@ To run the example:
 ```bash
 python examples/example_usage.py
 ```
-
-## License
-
-MIT License. See the [LICENSE](LICENSE) file for details.
+## Test data
+Test data is provided in the repository in the examples/data folder.
 
 
 ## Contributors & Maintainers
 
-This project is maintained under the [NEURES Lab](https://github.com/Neures-1158) GitHub organization.  
-Main maintainer: **Damien Bachasson** (author and lead developer).
+This project is maintained under the [NEURES Lab](https://github.com/Neures-1158) GitHub organization.
 
-Contributions from lab members and collaborators are welcome.
+Contributions from lab members, collaborators, and the wider community are very welcome. Please feel free to contribute by submitting issues or pull requests on GitHub.
+
+## License
+
+✨ MIT License. See the [LICENSE](LICENSE) file for details.
