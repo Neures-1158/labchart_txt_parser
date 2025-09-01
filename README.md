@@ -1,7 +1,19 @@
 # LabChart Parser
 
 Parser for ADInstruments LabChart text exports (`.txt` files).  
+
 Converts exported LabChart data into a pandas DataFrame with blocks, continuous time, and comments.
+
+- Parse LabChart `.txt` exports using [labchart_parser](https://github.com/Neures-1158/labchart_txt_parser).  
+
+## Export from labchart as .txt
+
+Export from labchart as follows:
+- 
+  <img src="img/lc_signal_export.png" width="300" alt="LabChart screenshot showing signal export dialog">
+
+    - Before exporting in LabChart, make sure time is displayed as "Start from Block"
+
 
 ## Installation
 
@@ -12,7 +24,7 @@ Converts exported LabChart data into a pandas DataFrame with blocks, continuous 
 Install directly from GitHub:
 
 ```bash
-pip install git+https://github.com/Neures-1158/lachart_txt_parser.git
+pip install git+https://github.com/Neures-1158/labchart_txt_parser.git
 ```
 
 ### For developers
@@ -20,8 +32,8 @@ pip install git+https://github.com/Neures-1158/lachart_txt_parser.git
 Clone this repository and install in editable mode:
 
 ```bash
-git clone https://github.com/Neures-1158/lachart_txt_parser.git
-cd lachart_txt_parser
+git clone https://github.com/Neures-1158/labchart_txt_parser.git
+cd labchart_txt_parser
 pip install -e .
 ```
 
