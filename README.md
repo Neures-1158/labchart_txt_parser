@@ -44,15 +44,16 @@ See the [examples/example_usage.py](examples/example_usage.py) script for a comp
 
 - Loading a LabChart text file.
 - Accessing metadata, blocks, and channel names.
-- Working with comments (`INSPI`, `EXPI`, etc.).
-- Plotting signals using matplotlib.
-- Performing cycle-by-cycle calculations.
+- Plotting signals
+
+See https://github.com/Neures-1158/resp_metrics for breath by breath analysis.
 
 To run the example:
 
 ```bash
 python examples/example_usage.py
 ```
+
 ## Test data
 Test data is provided in the repository in the examples/data folder.
 
