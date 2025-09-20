@@ -24,6 +24,9 @@ def main():
     print("Comments:")
     print(lc.comments.head())
 
+    event = lc.get_block_comments_excluding(1, exclude_values=["INSPI", "EXPI"])[0]
+    print("First comment in block 1 excluding INSPI/EXPI:", event)
+
     # Get df from block 1
     df_bloc1 = lc.get_block_df(1)
     # Plot pressure (channel "Pressure") for block 1

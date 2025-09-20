@@ -28,8 +28,18 @@ class LabChartFile:
     def comments(self):
         return self._data[self._data["Comment"].notna()][["Time", "time_block", "time_abs", "block", "Comment"]].reset_index(drop=True)
 
+    def get_block_comments_excluding(self, block: int, exclude_values: list):
+            comments = self.comments
+            # Filtrer sur le bloc
+            comments_block = comments[comments["block"] == block]
+            # Exclure les commentaires contenant une des valeurs
+            mask = ~comments_block["Comment"].str.contains('|'.join(map(str, exclude_values)), case=False, na=False)
+            # Retourner uniquement la colonne "Comment" sous forme de liste Python
+            return comments_block.loc[mask, "Comment"].tolist()
+
     def get_block_df(self, b: int):
         return self._data.loc[self._data["block"] == b, ["Time", "time_block", "time_abs", "Comment", *self.channels]]
+    
 
     def get_channel(self, b: int, channel: str):
         if channel not in self.channels:
