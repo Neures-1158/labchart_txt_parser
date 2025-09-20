@@ -14,6 +14,7 @@ import pandas as pd
 def main():
     # Load the exported file
     lc = LabChartFile.from_file("examples/data/labchart_file.example.txt")
+    
     # lc = LabChartFile.from_file("examples/data/labchart_file_negTime.txt")
 
 
