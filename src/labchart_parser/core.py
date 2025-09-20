@@ -36,14 +36,14 @@ class LabChartFile:
 
     def get_block_comments_excluding(self, block: int, exclude_values: list):
         """
-        Return a list of comments for a specific block, excluding those that contain any of the specified values.
+        Return comments for a block, excluding those that match any value in the provided list (case-insensitive).
         """
         comments = self.comments
-        # Filtrer sur le bloc
+        # Filter on the selected block
         comments_block = comments[comments["block"] == block]
-        # Exclure les commentaires contenant une des valeurs
-        mask = ~comments_block["Comment"].str.contains('|'.join(map(str, exclude_values)), case=False, na=False)
-        # Retourner uniquement la colonne "Comment" sous forme de liste Python
+        exclude_normalized = {str(v).strip().casefold() for v in exclude_values}
+        comment_norm = comments_block["Comment"].str.strip().str.casefold()
+        mask = ~comment_norm.isin(exclude_normalized)
         return comments_block.loc[mask, "Comment"].tolist()
 
     def get_block_df(self, b: int):
