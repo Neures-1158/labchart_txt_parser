@@ -2,9 +2,7 @@
 
 Parser for ADInstruments LabChart text exports (`.txt` files).  
 
-Converts exported LabChart data into a pandas DataFrame with blocks, continuous time, and comments.
-
-- Parse LabChart `.txt` exports using [labchart_parser](https://github.com/Neures-1158/labchart_txt_parser).  
+Converts exported LabChart data into a pandas DataFrame with blocks, continuous time, and comments. 
 
 ## Export from labchart as .txt
 
@@ -40,7 +38,7 @@ pip install -e .
 
 ## Usage
 
-See the [examples/example_usage.py](examples/example_usage.py) script for a complete demonstration of:
+See the [examples/example_usage.py](examples/example_usage.py) script and [notebook](examples/labchart_parser_walkthrough.ipynb) for a complete demonstration of:
 
 - Loading a LabChart text file.
 - Accessing metadata, blocks, and channel names.
@@ -48,11 +46,6 @@ See the [examples/example_usage.py](examples/example_usage.py) script for a comp
 
 See https://github.com/Neures-1158/resp_metrics for breath by breath analysis.
 
-To run the example:
-
-```bash
-python examples/example_usage.py
-```
 
 ## Test data
 Test data is provided in the repository in the examples/data folder.
