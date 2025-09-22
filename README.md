@@ -53,7 +53,7 @@ Test data is provided in the repository in the examples/data folder.
 
 ## Contributors & Maintainers
 
-This project is maintained under the [NEURES Lab](https://github.com/Neures-1158) GitHub organization.
+This project is maintained under the [NEURES](https://github.com/Neures-1158) GitHub organization.
 
 Contributions from lab members, collaborators, and the wider community are very welcome. Please feel free to contribute by submitting issues or pull requests on GitHub.
 
