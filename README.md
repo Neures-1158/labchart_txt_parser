@@ -2,7 +2,7 @@
 
 Parser for ADInstruments LabChart text exports (`.txt` files).  
 
-Converts exported LabChart data into a pandas DataFrame with blocks, continuous time, and comments. 
+Converts exported LabChart data into a pandas DataFrame with blocks, time, and comments. 
 
 ## Export from labchart as .txt
 
