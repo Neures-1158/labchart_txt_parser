@@ -13,8 +13,7 @@ Additionally, the following columns are computed:
 * ``time_abs`` provides continuous time across all blocks by stitching
   together relative times.
 * ``time_block`` is the time within each block, re-based to start at 0.0
-  for the first sample of the block (useful to align comment times exactly
-  from zero within a block).
+  for the first sample of the block.
 """
 
 from __future__ import annotations
@@ -49,11 +48,13 @@ def parse_labchart_txt(path: str) -> Tuple[pd.DataFrame, Dict[str, object]]:
         A tuple ``(df, meta)`` where ``df`` contains the parsed data and
         ``meta`` holds the parsed metadata. ``df`` includes the columns:
 
-        * ``Time`` – relative time within each block.
+        * ``Time`` –  time within each block.
+        * ``time_block`` – time with each block rebased to 0
         * one column per channel detected in the header.
         * ``Comment`` – annotation text (``None`` on numeric rows).
         * ``block`` – block index (1-based).
         * ``time_abs`` – continuous time across blocks.
+        
 
     Raises
     ------
