@@ -8,7 +8,6 @@ project root.
 """
 
 import matplotlib.pyplot as plt
-
 from labchart_parser import LabChartFile
 
 
