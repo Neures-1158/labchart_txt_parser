@@ -5,6 +5,8 @@ the project follows [SemVer](https://semver.org).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-29
+
 - Per-block metadata exposed under `meta["blocks"]: list[dict]`. Top-level
   `meta` mirrors block 0 for back-compat, except `ChannelTitle` (now the
   DataFrame columns) and `Range`/`TopValue`/`BottomValue` (per-block only).
@@ -13,6 +15,9 @@ the project follows [SemVer](https://semver.org).
   ~320k rows/s on a synthetic 500k×5 file. Per-cell-NaN A2 behavior
   preserved via `pd.to_numeric(errors="coerce")`.
 - `time_abs` stitching uses each block's own `Interval_s`.
+- `LabChartFile.blocks` now returns `list[int]` (Python ints, not numpy scalars).
+- `matplotlib` imported lazily inside `plot_channel()` to avoid import-time
+  overhead and backend issues in headless environments.
 
 ## [0.1.2] - 2026-04-28
 
@@ -42,7 +47,8 @@ the project follows [SemVer](https://semver.org).
 - Initial release: `LabChartFile`, `parse_labchart_txt()`, block /
   channel / comment extraction.
 
-[Unreleased]: https://github.com/Neures-1158/labchart_txt_parser/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Neures-1158/labchart_txt_parser/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/Neures-1158/labchart_txt_parser/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/Neures-1158/labchart_txt_parser/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Neures-1158/labchart_txt_parser/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Neures-1158/labchart_txt_parser/releases/tag/v0.1.0

@@ -5,7 +5,6 @@ from __future__ import annotations
 import os
 from typing import Any
 
-import matplotlib.pyplot as plt
 import pandas as pd
 
 from .exceptions import InvalidChannelError
@@ -115,6 +114,8 @@ class LabChartFile:
             block_label = "All blocks"
 
         if ax is None:
+            import matplotlib.pyplot as plt
+
             _, ax = plt.subplots(figsize=figsize)
 
         ax.plot(df[time_col], df[channel], **kwargs)
