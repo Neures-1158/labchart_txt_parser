@@ -42,7 +42,7 @@ class LabChartFile:
 
     @property
     def blocks(self) -> list[int]:
-        return list(self._data["block"].unique())
+        return [int(block) for block in self._data["block"].unique()]
 
     @property
     def comments(self) -> pd.DataFrame:
