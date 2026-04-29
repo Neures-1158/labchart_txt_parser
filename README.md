@@ -1,62 +1,57 @@
 # LabChart Parser
 
-Parser for ADInstruments LabChart text exports (`.txt` files).  
+[![CI](https://github.com/Neures-1158/labchart_txt_parser/actions/workflows/ci.yml/badge.svg)](https://github.com/Neures-1158/labchart_txt_parser/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Converts exported LabChart data into a pandas DataFrame with blocks, time, and comments. 
+Parses ADInstruments LabChart `.txt` exports into a pandas DataFrame with
+blocks, continuous time, and comments.
 
-## Export from labchart as .txt
+## Export from LabChart
 
-Export from labchart as follows:
+<img src="img/lc_signal_export.png" width="300" alt="LabChart export dialog">
 
-  <img src="img/lc_signal_export.png" width="300" alt="LabChart screenshot showing signal export dialog">
+Set time display to **"Start from Block"** before exporting.
 
-Before exporting in LabChart, make sure time is displayed as "Start from Block"
-
-
-## Installation
-
-**Prerequisites**: Python ≥3.8, pip ≥21, and git must be installed.
-
-
-### For users
-
-Install directly from GitHub:
+## Install
 
 ```bash
 pip install git+https://github.com/Neures-1158/labchart_txt_parser.git
 ```
 
-### For developers
+For development: `pip install -e ".[dev]"` (adds pytest, ruff, black, isort).
 
-Clone this repository and install in editable mode:
+## Quick start
 
-```bash
-git clone https://github.com/Neures-1158/labchart_txt_parser.git
-cd labchart_txt_parser
-pip install -e .
+```python
+from labchart_parser import LabChartFile
+
+lc = LabChartFile.from_file("data/recording.txt")
+
+lc.metadata             # dict; per-block metadata under lc.metadata["blocks"]
+lc.channels             # ['Flow', 'Pressure', 'Volume', ...]
+lc.blocks               # [1, 2, 3, ...]
+lc.get_block_df(1)      # one block as a DataFrame
+lc.get_channel(1, "Pressure")
+lc.slice_time_abs(10.0, 20.0)
+lc.plot_channel("Flow", block=1)
 ```
 
-## Usage
+A walkthrough notebook lives at [examples/labchart_parser_walkthrough.ipynb](examples/labchart_parser_walkthrough.ipynb).
+For breath-by-breath analysis on top of this parser, see [resp_metrics](https://github.com/Neures-1158/resp_metrics).
 
-See the [examples/example_usage.py](examples/example_usage.py) script and [notebook](examples/labchart_parser_walkthrough.ipynb) for a complete demonstration of:
+## Tests
 
-- Loading a LabChart text file.
-- Accessing metadata, blocks, and channel names.
-- Plotting signals
+```bash
+pytest
+```
 
-See https://github.com/Neures-1158/resp_metrics for breath by breath analysis.
+## Maintainer
 
+Maintained under [NEURES](https://github.com/Neures-1158). Lead: Damien
+Bachasson, PhD ([GitHub](https://github.com/dambach) ·
+[ORCID](https://orcid.org/0000-0001-6335-9916) ·
+[Lab](https://sante.sorbonne-universite.fr/structures-de-recherche/neurophysiologie-respiratoire-experimentale-et-clinique)).
+Issues and PRs welcome.
 
-## Test data
-Test data is provided in the repository in the examples/data folder.
-
-
-## Contributors & Maintainers
-
-This project is maintained under the [NEURES](https://github.com/Neures-1158) GitHub organization.
-
-Contributions from lab members, collaborators, and the wider community are very welcome. Please feel free to contribute by submitting issues or pull requests on GitHub.
-
-## License
-
-✨ MIT License. See the [LICENSE](LICENSE) file for details.
+MIT licensed — see [LICENSE](LICENSE).
