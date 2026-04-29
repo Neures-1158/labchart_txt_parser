@@ -72,15 +72,18 @@ def parse_labchart_txt(
 
     _validate_channel_consistency(blocks)
 
-    n_cols = len(blocks[0]["data_lines"][0].split("\t"))
+    chan_titles = blocks[0]["meta"].get("ChannelTitle")
+    if chan_titles:
+        n_cols = 1 + len(chan_titles)
+    else:
+        n_cols = len(blocks[0]["data_lines"][0].split("\t"))
     if n_cols < 2:
         raise FileParsingError(
             f"The file contains only {n_cols} column(s). "
             "A valid LabChart export must contain at least Time + 1 channel."
         )
 
-    chan_titles = blocks[0]["meta"].get("ChannelTitle")
-    if chan_titles and len(chan_titles) == n_cols - 1:
+    if chan_titles:
         channel_cols: list[str] = ["Time"] + chan_titles
     else:
         channel_cols = ["Time"] + [f"Ch{i}" for i in range(1, n_cols)]
