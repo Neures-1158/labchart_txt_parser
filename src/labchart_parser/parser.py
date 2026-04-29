@@ -92,9 +92,9 @@ def parse_labchart_txt(
     if time_format and time_format != "StartOfBlock":
         warnings.warn(
             f"TimeFormat={time_format!r} (expected 'StartOfBlock'). "
-            "Block detection relies on negative time jumps; with this "
-            "format the file will be parsed as a single block. Re-export "
-            "from LabChart with 'Start from Block' selected.",
+            "Time-reset-based block detection relies on negative time jumps; "
+            "with this format, only header transitions will create blocks. "
+            "Re-export from LabChart with 'Start from Block' selected.",
             stacklevel=2,
         )
 
