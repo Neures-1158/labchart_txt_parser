@@ -47,7 +47,7 @@ class TestParseLabchartTxt:
     def test_block_column_is_integer(self):
         """Block column should contain integers."""
         df, _ = parse_labchart_txt(str(EXAMPLE_FILE))
-        assert df["block"].dtype in (int, np.int64, np.int32)
+        assert pd.api.types.is_integer_dtype(df["block"])
 
     def test_time_columns_are_float(self):
         """Time columns should be numeric (float)."""
