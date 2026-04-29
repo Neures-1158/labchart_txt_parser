@@ -11,7 +11,7 @@ blocks, continuous time, and comments.
 
 <img src="img/lc_signal_export.png" width="300" alt="LabChart export dialog">
 
-Set time display to **"Start from Block"** before exporting.
+Set time display to **"Start from Block"** before exporting, and make sure **"Block header"** is ticked.
 
 ## Install
 
