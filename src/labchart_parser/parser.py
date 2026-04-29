@@ -1,4 +1,20 @@
-"""Parse ADInstruments LabChart ``.txt`` exports into a pandas DataFrame."""
+"""Low-level parser for LabChart text exports.
+
+This module defines a single function, :func:`parse_labchart_txt`, which
+reads a tab-delimited text file exported from ADInstruments LabChart and
+returns a pandas DataFrame and a dictionary of metadata.  The DataFrame
+contains one row per sample and includes a ``Comment`` column that
+captures annotation text for lines containing comments. Numeric sample
+lines have ``Comment`` set to ``None``.
+
+Additionally, the following columns are computed:
+
+* ``block`` identifies the block of recording (starting at 1).
+* ``time_abs`` provides continuous time across all blocks by stitching
+  together relative times.
+* ``time_block`` is the time within each block, re-based to start at 0.0
+  for the first sample of the block.
+"""
 
 from __future__ import annotations
 
@@ -35,9 +51,28 @@ def parse_labchart_txt(
     ``time_abs``, ``time_block``. ``meta`` mirrors block 0's metadata at the
     top level and exposes the per-block list under ``meta["blocks"]``.
 
-    Raises ``FileNotFoundError``, ``FileParsingError`` (bad extension /
-    empty file / no data section / <2 columns / ChannelTitle mismatch),
-    or ``NoDataError`` (segmentation succeeded but every block was empty).
+    Returns
+    -------
+    Tuple[pandas.DataFrame, dict]
+        A tuple ``(df, meta)`` where ``df`` contains the parsed data and
+        ``meta`` holds the parsed metadata. ``df`` includes the columns:
+
+        * ``Time`` – time within each block.
+        * ``time_block`` – time within each block rebased to 0.
+        * one column per channel detected in the header.
+        * ``Comment`` – annotation text (``None`` on numeric rows).
+        * ``block`` – block index (1-based).
+        * ``time_abs`` – continuous time across blocks.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the file does not exist.
+    FileParsingError
+        If the file has a bad extension, is empty, has no data section,
+        has fewer than 2 columns, or has mismatched ``ChannelTitle`` across blocks.
+    NoDataError
+        If segmentation succeeded but every block was empty.
     """
     p = Path(path)
     if not p.exists():
