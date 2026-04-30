@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
+
 from labchart_parser.core import LabChartFile
 from labchart_parser.exceptions import InvalidChannelError
 
