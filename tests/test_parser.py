@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pytest
+
 from labchart_parser.exceptions import FileParsingError
 from labchart_parser.parser import parse_labchart_txt
 
